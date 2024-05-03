@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<TreeTableView fx:id="taskTreeTableView" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.GUI.TreeTableController">
+    <columns>
+        <TreeTableColumn fx:id="description" prefWidth="150" text="Description">
+            <cellValueFactory>
+                <PropertyValueFactory property="description" />
+            </cellValueFactory>
+        </TreeTableColumn>
+        <TreeTableColumn fx:id="dueDate" prefWidth="100" text="Due Date">
+            <cellValueFactory>
+                <PropertyValueFactory property="deadline" />
+            </cellValueFactory>
+        </TreeTableColumn>
+        <TreeTableColumn fx:id="priority" prefWidth="100" text="Priority">
+            <cellValueFactory>
+                <PropertyValueFactory property="priority" />
+            </cellValueFactory>
+        </TreeTableColumn>
+        <TreeTableColumn fx:id="estimatedDuration" prefWidth="150" text="Estimated Duration">
+            <cellValueFactory>
+                <PropertyValueFactory property="estimatedDuration" />
+            </cellValueFactory>
+        </TreeTableColumn>
+        <TreeTableColumn fx:id="progress" prefWidth="100" text="Progress">
+            <cellValueFactory>
+                <PropertyValueFactory property="progress" />
+            </cellValueFactory>
+        </TreeTableColumn>
+    </columns>
+</TreeTableView>
