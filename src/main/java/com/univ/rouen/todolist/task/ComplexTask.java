@@ -120,7 +120,6 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
         return getDescription();
     }
 
-
     /**
      * @return
      */
