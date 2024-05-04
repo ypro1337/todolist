@@ -18,6 +18,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+/**
+ * Controller class for the main task interface.
+ * Initializes the GUI and handles user actions.
+ */
 public class TaskController implements Initializable {
 
     @FXML
@@ -30,6 +34,9 @@ public class TaskController implements Initializable {
     private Button hideTreeTableViewButton;
     private TreeTableController treeTableController;
 
+    /**
+     * Displays the TreeTableView in the SubScene.
+     */
     @FXML
     private void showTreeTableView() {
         subScene.setVisible(true);
@@ -38,7 +45,9 @@ public class TaskController implements Initializable {
         hideTreeTableViewButton.setVisible(true);
     }
 
-    // Method to hide the TreeTableView in the SubScene
+    /**
+     * Hides the TreeTableView in the SubScene.
+     */
     @FXML
     private void hideTreeTableView() {
         subScene.setVisible(false);
@@ -49,6 +58,9 @@ public class TaskController implements Initializable {
 
 
 
+    /**
+     * Displays the task form in a new window.
+     */
     @FXML
     private void showTaskForm() {
         try {
@@ -84,6 +96,10 @@ public class TaskController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Opens the task form in a new window.
+     */
     @FXML
     public void addTask(ActionEvent actionEvent) {
         try {
@@ -104,10 +120,20 @@ public class TaskController implements Initializable {
         }
 
     }
+
+    /**
+     * Saves the current tree to an XML file.
+     */
     @FXML
     public void saveTree(ActionEvent actionEvent) {
+        // Implement saving logic here
     }
+
+    /**
+     * Loads a tree from an XML file.
+     */
     @FXML
     public void openTree(ActionEvent actionEvent) {
+        // Implement loading logic here
     }
 }

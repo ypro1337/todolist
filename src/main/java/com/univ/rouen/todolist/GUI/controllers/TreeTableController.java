@@ -3,8 +3,6 @@ package com.univ.rouen.todolist.gui.controllers;
 import com.univ.rouen.todolist.task.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,7 +11,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -40,7 +37,6 @@ public class    TreeTableController implements Initializable {
 
     /**
      * show prompt message
-     * @param message
      */
     private void showPrompt(String message, Node node) {
         Tooltip tooltip = new Tooltip(message);
@@ -50,45 +46,39 @@ public class    TreeTableController implements Initializable {
         tooltip.show(node, node.getScene().getWindow().getX(), node.getScene().getWindow().getY() + node.getScene().getWindow().getHeight());
     }
 
-
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up the columns of the TreeTableView and defines cell factories for editing.
+     * Populates the TreeTableView with sample data.
+     *
+     * @param url           The location used to resolve relative paths for the root object, or {@code null} if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or {@code null} if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        description.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ModifiableTask, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ModifiableTask, String> taskStringCellDataFeatures) {
-                ModifiableTask task =  taskStringCellDataFeatures.getValue().getValue();
-
-                return new SimpleStringProperty(task.getDescription());
-            }
+        // Description column setup
+        description.setCellValueFactory(taskStringCellDataFeatures -> {
+            ModifiableTask task =  taskStringCellDataFeatures.getValue().getValue();
+            return new SimpleStringProperty(task.getDescription());
         });
         description.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-        description.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<ModifiableTask, String>>() {
-            @Override
-            public void handle(TreeTableColumn.CellEditEvent<ModifiableTask, String> TaskStringCellEditEvent) {
-                String newVal = TaskStringCellEditEvent.getNewValue();
-                String oldVal = TaskStringCellEditEvent.getOldValue();
-                ModifiableTask currentTask =TaskStringCellEditEvent.getTreeTablePosition().getTreeItem().getValue();
-               currentTask.setDescription(newVal);
-                showPrompt("Description has been modified from '" + oldVal + "' to '" + newVal + "'", TaskStringCellEditEvent.getTreeTableView());
-            }
+        description.setOnEditCommit(TaskStringCellEditEvent -> {
+            String newVal = TaskStringCellEditEvent.getNewValue();
+            String oldVal = TaskStringCellEditEvent.getOldValue();
+            ModifiableTask currentTask =TaskStringCellEditEvent.getTreeTablePosition().getTreeItem().getValue();
+            currentTask.setDescription(newVal);
+            showPrompt("Description has been modified from '" + oldVal + "' to '" + newVal + "'", TaskStringCellEditEvent.getTreeTableView());
         });
 
-        priority.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ModifiableTask, Priority>, ObservableValue<Priority>>() {
-            @Override
-            public ObservableValue<Priority> call(TreeTableColumn.CellDataFeatures<ModifiableTask, Priority> taskPriorityCellDataFeatures) {
-                ModifiableTask currentTask = taskPriorityCellDataFeatures.getValue().getValue();
-                return new SimpleObjectProperty<>(currentTask.getPriority());
-            }
+        // Priority column setup
+        priority.setCellValueFactory(taskPriorityCellDataFeatures -> {
+            ModifiableTask currentTask = taskPriorityCellDataFeatures.getValue().getValue();
+            return new SimpleObjectProperty<>(currentTask.getPriority());
         });
 
-        // dueDate
-        dueDate.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ModifiableTask, LocalDate>, ObservableValue<LocalDate>>() {
-            @Override
-            public ObservableValue<LocalDate> call(TreeTableColumn.CellDataFeatures<ModifiableTask, LocalDate> taskLocalDateCellDataFeatures) {
-                return new SimpleObjectProperty<>(taskLocalDateCellDataFeatures.getValue().getValue().getDueDate());
-            }
-        });
+        // Due Date column setup
+        dueDate.setCellValueFactory(taskLocalDateCellDataFeatures -> new SimpleObjectProperty<>(taskLocalDateCellDataFeatures.getValue().getValue().getDueDate()));
         dueDate.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(new LocalDateStringConverter()));
         dueDate.setOnEditCommit((TreeTableColumn.CellEditEvent<ModifiableTask, LocalDate> event) -> {
             LocalDate newVal = event.getNewValue();
@@ -98,41 +88,26 @@ public class    TreeTableController implements Initializable {
             showPrompt("Description has been modified from '" + oldVal + "' to '" + newVal + "'", event.getTreeTableView());
         });
 
-
-        //TODO Change these implementations into a legit Visitor Pattern
-        estimatedDuration.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ModifiableTask, Integer>, ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TreeTableColumn.CellDataFeatures<ModifiableTask, Integer> taskIntegerCellDataFeatures) {
-                return new SimpleObjectProperty<>(taskIntegerCellDataFeatures.getValue().getValue().getEstimatedDuration());
-            }
-        });
+        // Estimated Duration column setup
+        estimatedDuration.setCellValueFactory(taskIntegerCellDataFeatures -> new SimpleObjectProperty<>(taskIntegerCellDataFeatures.getValue().getValue().getEstimatedDuration()));
         estimatedDuration.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(new IntegerStringConverter()));
         estimatedDuration.setOnEditCommit((TreeTableColumn.CellEditEvent<ModifiableTask, Integer> event) -> {
             Integer oldValue =event.getOldValue();
             Integer newValue= event.getNewValue();
             ModifiableTask currentTask = event.getTreeTablePosition().getTreeItem().getValue();
             currentTask.setEstimatedDuration(newValue);
+            showPrompt("Description has been modified from '" + oldValue + "' to '" + newValue + "'", event.getTreeTableView());
         });
 
-        progress.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ModifiableTask, Double>, ObservableValue<Double>>() {
-            @Override
-            public ObservableValue<Double> call(TreeTableColumn.CellDataFeatures<ModifiableTask, Double> taskIntegerCellDataFeatures) {
-                return new SimpleObjectProperty<>( taskIntegerCellDataFeatures.getValue().getValue().getProgress());
-            }
-        });
+        // Progress column setup
+        progress.setCellValueFactory(taskIntegerCellDataFeatures -> new SimpleObjectProperty<>( taskIntegerCellDataFeatures.getValue().getValue().getProgress()));
         progress.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(new DoubleStringConverter()));
-        /*progress.setOnEditCommit((TreeTableColumn.CellEditEvent<ModifiableTask, Integer> event) -> {
-            Integer oldValue =event.getOldValue();
-            Integer newValue= event.getNewValue();
-            ModifiableTask currentTask = event.getTreeTablePosition().getTreeItem().getValue();
-            currentTask;
-        });*/
 
+        // TreeTableView setup
         taskTreeTableView.setEditable(true);
         BooleanTask boolTask = new BooleanTask("Child ModifiableTask",Priority.SECONDARY,LocalDate.MAX,20,false);
         TreeItem<ModifiableTask> rootItem = new TreeItem<>(new ComplexTask("Root ModifiableTask",Priority.NORMAL,boolTask));
         taskTreeTableView.setRoot(rootItem);
-
 
     }
 }

@@ -1,6 +1,7 @@
 package com.univ.rouen.todolist.gui.controllers;
 
 import com.univ.rouen.todolist.task.Priority;
+import com.univ.rouen.todolist.task.TaskManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -8,9 +9,14 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+/**
+ * Controller class for the ComplexTask form.
+ * Extends AbstractTaskFormController and implements Initializable.
+ */
 public class ComplexTaskFormController extends AbstractTaskFormController implements Initializable {
 
-
+    private TaskManager taskManager;
 
     @FXML
     private TextField descriptionTextField;
@@ -26,6 +32,13 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
     private boolean isDescriptionLengthValid = true;
 
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up event listeners for form fields.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         priorityChoiceBox.getItems().addAll(Priority.values());
@@ -40,6 +53,12 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
             updateSubmitButtonState();
         });
     }
+
+    /**
+     * Handles the form submission.
+     * Validates form fields and retrieves form values.
+     * For demonstration, prints the form values.
+     */
     public void submitForm() {
         // Validate fields
         if (descriptionTextField.getText().isEmpty()) {
@@ -54,24 +73,12 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
 
 
         // Submit form (you can implement your logic here)
-        // For demonstration, printing the form values
-        System.out.println("Description: " + description);
-        //System.out.println("Due Date: " + dueDate);
-        System.out.println("Priority: " + priority);
-        //System.out.println("Estimated Duration: " + estimatedDuration);
-        System.out.println("Parent Task: " + parentTask);
+
+        //TODO Create TreeItem + Task
+        //taskManager.addParentTask(this task);
     }
 
 
-    private boolean validateDescriptionLength(String newValue) {
-        if (newValue.length() > 20) {
-            errorLabel.setText("Description length cannot exceed 20 characters");
-            errorLabel.setStyle("-fx-text-fill: red;");
-            return false;
-        }
-        errorLabel.setText("");
-        return true;
-    }
     private void updateSubmitButtonState() {
         submitButton.setDisable(!(isDescriptionLengthValid));
     }

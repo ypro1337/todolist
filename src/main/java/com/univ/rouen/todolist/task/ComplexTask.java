@@ -11,19 +11,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a complex task in the to-do list application.
+ */
 @Getter
 @Setter
 @XmlRootElement(name = "complexTask")
-public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
-    @XmlElements({@XmlElement}) 
+public class ComplexTask extends AbstractTask implements ChildTask, ParentTask {
+
+    @XmlElements({@XmlElement})
     private List<ChildTask> subTasks;
-    private  ParentTask parentTask;
+    private ParentTask parentTask;
 
     @XmlElement
     private Double progress;
 
+    /**
+     * Default constructor for ComplexTask.
+     */
     public ComplexTask() {}
 
+    /**
+     * Constructs a ComplexTask with the given description and priority.
+     *
+     * @param description The description of the task.
+     * @param priority    The priority of the task.
+     */
     public ComplexTask(String description, Priority priority) {
         this.description = description;
         this.priority = priority;
@@ -32,6 +45,13 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
         updateProgress();
     }
 
+    /**
+     * Constructs a ComplexTask with the given description, priority, and subtasks.
+     *
+     * @param description The description of the task.
+     * @param priority    The priority of the task.
+     * @param subTasks    The list of subtasks.
+     */
     public ComplexTask(String description, Priority priority, List<ChildTask> subTasks) {
         this.description = description;
         this.priority = priority;
@@ -40,33 +60,46 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
         updateProgress();
     }
 
-    public ComplexTask(String description, Priority priority,ChildTask... subTasks) {
+    /**
+     * Constructs a ComplexTask with the given description, priority, and subtasks.
+     *
+     * @param description The description of the task.
+     * @param priority    The priority of the task.
+     * @param subTasks    The subtasks.
+     */
+    public ComplexTask(String description, Priority priority, ChildTask... subTasks) {
         this.description = description;
         this.priority = priority;
-        this.subTasks = new ArrayList<>(Arrays.stream(subTasks).toList());
+        this.subTasks = new ArrayList<>(Arrays.asList(subTasks));
         updateEstimatedDuration();
         updateProgress();
     }
 
-
     /**
-     * @return
+     * Checks if all subtasks are completed.
+     *
+     * @return True if all subtasks are completed, otherwise false.
      */
     @Override
     public Boolean isCompleted() {
-        // TODO check if all subTaks Complete
-        return false;
+        return subTasks.stream().allMatch(ChildTask::isCompleted);
     }
 
     /**
-     * @param completed
+     * Sets the completion state of all subtasks.
+     *
+     * @param completed The completion state to set for all subtasks.
      */
     @Override
     public void setCompleted(Boolean completed) {
-        //TODO make all SubTasks Complete
+        subTasks.forEach(subTask -> subTask.setCompleted(completed));
     }
 
-    //TODO implement update classes for parent
+    // TODO: Implement update methods for parent tasks
+
+    /**
+     * Updates the due date of the complex task based on its subtasks.
+     */
     @Override
     public void updateDueDate() {
         // Min LocalDate is today for todoList
@@ -82,25 +115,32 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
             updateParent(parentTask);
         }
     }
-     @Override
-     public void updateEstimatedDuration() {
+
+    /**
+     * Updates the estimated duration of the complex task based on its subtasks.
+     */
+    @Override
+    public void updateEstimatedDuration() {
         Integer totalDuration = 0;
         for (ChildTask task : subTasks) {
             totalDuration += task.getEstimatedDuration();
         }
         this.estimatedDuration = totalDuration;
-         if(parentTask!=null)
-         {
-             updateParent(parentTask);
-         }
+        if(parentTask!=null)
+        {
+            updateParent(parentTask);
+        }
     }
+
+    /**
+     * Updates the progress of the complex task based on its subtasks.
+     */
     @Override
     public void updateProgress() {
         Double totalProgress = 0.0;
         double subTaskCount = subTasks.size();
         if (subTaskCount > 0) {
             for (ChildTask task : subTasks) {
-
                 totalProgress += task.isCompleted() ? 100.0 : 0.0;
             }
             this.progress = totalProgress / subTaskCount;
@@ -110,27 +150,33 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
         if(parentTask!=null)
         {
             updateParent(parentTask);
-
         }
     }
 
-
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return The description of the task.
+     */
     @Override
     public String toString() {
         return getDescription();
     }
 
     /**
-     * @return
+     * Returns the list of child tasks.
+     *
+     * @return The list of child tasks.
      */
     @Override
     public List<ChildTask> getChildren() {
         return this.subTasks;
     }
 
-
     /**
-     * @param parentTask
+     * Updates the parent task.
+     *
+     * @param parentTask The parent task to update.
      */
     @Override
     public void updateParent(ParentTask parentTask) {
@@ -138,4 +184,9 @@ public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
         parentTask.updateProgress();
         parentTask.updateEstimatedDuration();
     }
+
+    public void addSubTask(ChildTask childTask) {
+        this.subTasks.add(childTask);
+    }
 }
+

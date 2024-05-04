@@ -1,6 +1,7 @@
 package com.univ.rouen.todolist.gui.controllers;
 
 import com.univ.rouen.todolist.task.Priority;
+import com.univ.rouen.todolist.task.TaskManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,8 +10,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the BooleanTask form.
+ * Extends AbstractTaskFormController and implements Initializable.
+ */
 public class BooleanTaskFormController extends AbstractTaskFormController implements Initializable {
 
+    private TaskManager taskManager;
 
 
     @FXML
@@ -31,7 +37,13 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
     private boolean isDurationValid = true;
     private boolean isDescriptionLengthValid = true;
 
-
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up event listeners for form fields.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         priorityChoiceBox.getItems().addAll(Priority.values());
@@ -60,6 +72,12 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
         });
     }
 
+    /**
+     * Validates the selected date.
+     *
+     * @param date The selected date.
+     * @return True if the date is valid, otherwise false.
+     */
     private boolean validateDate(LocalDate date) {
         try {
             if (date.isBefore(LocalDate.now())) {
@@ -77,60 +95,50 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
         }
     }
 
+    /**
+     * Validates the entered estimated duration.
+     *
+     * @param newValue The entered estimated duration.
+     * @return True if the estimated duration is valid, otherwise false.
+     */
     private boolean validateDuration(String newValue) {
         try{
             if (!newValue.matches("\\d+") || Integer.parseInt(newValue) < 0) {
                 errorLabel.setText("Estimated duration must be non-negative number");
                 return false ;
             }
-        }catch (NumberFormatException e){
-
+        }catch (NumberFormatException e) {
+            throw new RuntimeException(e);
         }
         errorLabel.setText("");
         return true;
     }
 
-    private boolean validateDescriptionLength(String newValue) {
-        if (newValue.length() > 20) {
-            errorLabel.setText("Description length cannot exceed 20 characters");
-            errorLabel.setStyle("-fx-text-fill: red;");
-            return false;
-        }
-        errorLabel.setText("");
-        return true;
-    }
-
+    /**
+     * Updates the state of the submit button based on field validations.
+     */
     private void updateSubmitButtonState() {
         submitButton.setDisable(!(isDateValid && isDurationValid && isDescriptionLengthValid));
     }
+
+    /**
+     * Handles the form submission.
+     * Retrieves the form values and submits the form.
+     */
     public void submitForm() {
         // Validate fields
-
 
         // Get form values
         String description = descriptionTextField.getText();
         LocalDate dueDate = dueDatePicker.getValue();
         Priority priority = priorityChoiceBox.getValue();
-        int estimatedDuration = Integer.parseInt(estimatedDurationTextField.getText());
-        boolean completed = completedCheckBox.isSelected();
+        Integer estimatedDuration = Integer.parseInt(estimatedDurationTextField.getText());
+        Boolean completed = completedCheckBox.isSelected();
 
-        // Submit form (you can implement your logic here)
-        // For demonstration, printing the form values
-        System.out.println("Description: " + description);
-        System.out.println("Due Date: " + dueDate);
-        System.out.println("Priority: " + priority);
-        System.out.println("Estimated Duration: " + estimatedDuration);
-        System.out.println("Completed: " + completed);
+        // Submit form ( TODO implement logic here)
+
     }
 
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  {@code null} if the location is not known.
-     * @param views The views used to localize the root object, or {@code null} if
-     *                  the root object was not localized.
-     */
+
 
 }

@@ -11,6 +11,11 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+
+/**
+ * Controller class for the task form selector.
+ * Initializes the form choice box and handles the display of different task forms.
+ */
 public class TaskFormController implements Initializable {
 
     @FXML
@@ -19,6 +24,9 @@ public class TaskFormController implements Initializable {
     @FXML
     private SubScene subScene;
 
+    /**
+     * Displays the selected task form in the SubScene.
+     */
     @FXML
     private void displaySelectedForm() {
         String selectedForm = formChoiceBox.getValue();
@@ -39,6 +47,9 @@ public class TaskFormController implements Initializable {
         }
     }
 
+    /**
+     * Displays the complex task form in the SubScene.
+     */
     private void displayComplexTaskForm() {
         try {
             Parent complexTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/views/ComplexTaskForm.fxml")));
@@ -48,6 +59,9 @@ public class TaskFormController implements Initializable {
         }
     }
 
+    /**
+     * Displays the boolean task form in the SubScene.
+     */
     private void displayBooleanTaskForm() {
         try {
             Parent booleanTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/views/BooleanTaskForm.fxml")));
