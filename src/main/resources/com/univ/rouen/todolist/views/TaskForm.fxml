@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="350" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.GUI.TaskFormController">
+<VBox alignment="CENTER" prefHeight="350" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.TaskFormController">
     <ChoiceBox fx:id="formChoiceBox" onAction="#displaySelectedForm" prefHeight="26.0" prefWidth="219.0">
     </ChoiceBox>
     <!-- SubScene to display selected form -->

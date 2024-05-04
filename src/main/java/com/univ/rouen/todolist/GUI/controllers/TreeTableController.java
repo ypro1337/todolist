@@ -1,4 +1,4 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
 import com.univ.rouen.todolist.task.*;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,7 +23,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class TreeTableController implements Initializable {
+public class    TreeTableController implements Initializable {
 
     @FXML
     private TreeTableView<ModifiableTask> taskTreeTableView;

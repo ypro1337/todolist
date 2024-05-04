@@ -1,4 +1,4 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +41,7 @@ public class TaskFormController implements Initializable {
 
     private void displayComplexTaskForm() {
         try {
-            Parent complexTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/ComplexTaskForm-view.fxml")));
+            Parent complexTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/views/ComplexTaskForm.fxml")));
             subScene.setRoot(complexTaskForm);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class TaskFormController implements Initializable {
 
     private void displayBooleanTaskForm() {
         try {
-            Parent booleanTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/BooleanTaskForm-view.fxml")));
+            Parent booleanTaskForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/univ/rouen/todolist/views/BooleanTaskForm.fxml")));
             subScene.setRoot(booleanTaskForm);
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class TaskFormController implements Initializable {
      *
      * @param location  The location used to resolve relative paths for the root object, or
      *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
+     * @param resources The views used to localize the root object, or {@code null} if
      *                  the root object was not localized.
      */
     @Override

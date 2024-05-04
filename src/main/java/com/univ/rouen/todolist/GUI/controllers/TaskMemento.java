@@ -1,4 +1,4 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
 import com.univ.rouen.todolist.task.Task;
 import javafx.scene.control.TreeItem;

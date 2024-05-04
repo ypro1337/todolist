@@ -1,4 +1,6 @@
-package com.univ.rouen.todolist.task;
+package com.univ.rouen.todolist.builder;
+
+import com.univ.rouen.todolist.task.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

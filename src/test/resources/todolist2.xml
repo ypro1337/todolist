@@ -1,0 +1,33 @@
+<TodoList>
+    <ComplexTask description="Parent Task 1" priority="URGENT">
+        <ComplexTask description="Child Task 1.1" priority="NORMAL"/>
+        <BooleanTask description="Child Task 1.2" priority="SECONDARY" dueDate="2024-05-20" estimatedDuration="60" completed="true"/>
+    </ComplexTask>
+    <ComplexTask description="Parent Task 2" priority="NORMAL">
+        <BooleanTask description="Child Task 2.1" priority="URGENT" dueDate="2024-05-21" estimatedDuration="45" completed="false"/>
+        <ComplexTask description="Child Task 2.2" priority="SECONDARY">
+            <BooleanTask description="Grandchild Task 2.2.1" priority="URGENT" dueDate="2024-05-22" estimatedDuration="30" completed="true"/>
+            <BooleanTask description="Grandchild Task 2.2.2" priority="NORMAL" dueDate="2024-05-23" estimatedDuration="55" completed="false"/>
+        </ComplexTask>
+    </ComplexTask>
+    <ComplexTask description="Parent Task 3" priority="SECONDARY">
+        <BooleanTask description="Child Task 3.1" priority="URGENT" dueDate="2024-05-24" estimatedDuration="20" completed="true"/>
+        <ComplexTask description="Child Task 3.2" priority="NORMAL">
+            <BooleanTask description="Grandchild Task 3.2.1" priority="URGENT" dueDate="2024-05-25" estimatedDuration="40" completed="false"/>
+            <BooleanTask description="Grandchild Task 3.2.2" priority="NORMAL" dueDate="2024-05-26" estimatedDuration="25" completed="true"/>
+        </ComplexTask>
+    </ComplexTask>
+    <ComplexTask description="Parent Task 4" priority="URGENT">
+        <BooleanTask description="Child Task 4.1" priority="URGENT" dueDate="2024-05-27" estimatedDuration="35" completed="false"/>
+        <ComplexTask description="Child Task 4.2" priority="NORMAL">
+            <ComplexTask description="Grandchild Task 4.2.1" priority="URGENT">
+                <BooleanTask description="Great-Grandchild Task 4.2.1.1" priority="URGENT" dueDate="2024-05-28" estimatedDuration="30" completed="true"/>
+                <BooleanTask description="Great-Grandchild Task 4.2.1.2" priority="NORMAL" dueDate="2024-05-29" estimatedDuration="45" completed="false"/>
+            </ComplexTask>
+            <ComplexTask description="Grandchild Task 4.2.2" priority="NORMAL">
+                <BooleanTask description="Great-Grandchild Task 4.2.2.1" priority="URGENT" dueDate="2024-05-30" estimatedDuration="20" completed="true"/>
+                <BooleanTask description="Great-Grandchild Task 4.2.2.2" priority="NORMAL" dueDate="2024-05-31" estimatedDuration="35" completed="false"/>
+            </ComplexTask>
+        </ComplexTask>
+    </ComplexTask>
+</TodoList>

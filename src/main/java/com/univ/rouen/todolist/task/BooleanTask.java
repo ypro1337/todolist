@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @XmlRootElement(name = "booleanTask")
-public class BooleanTask extends AbstractTask implements ModifiableTask,ChildTask{
+public class BooleanTask extends AbstractTask implements ChildTask{
+
     @XmlAttribute
     private Boolean completed;
     private  ParentTask parentTask;
@@ -25,6 +26,15 @@ public class BooleanTask extends AbstractTask implements ModifiableTask,ChildTas
     public LocalDate getDueDate() {
         return this.dueDate;
     }
+
+    /**
+     * @return Completion state
+     */
+    @Override
+    public Boolean isCompleted() {
+        return this.completed;
+    }
+
     @Override
     public String getDescription() {
         return this.description;
@@ -43,23 +53,16 @@ public class BooleanTask extends AbstractTask implements ModifiableTask,ChildTas
         this.completed = completed;
     }
 
-
     /**
-     * @return
-     */
-
-
-
-    /**
-     * @param completed
+     * @param completed sets the completion state
      */
     @Override
     public void setCompleted(Boolean completed) {
         this.completed=completed;
     }
     @Override
-    public double getProgress() {
-        return completed ? 100 : 0 ;
+    public Double getProgress() {
+        return completed ? 100.0 : 0 ;
     }
 
     @Override
@@ -67,21 +70,11 @@ public class BooleanTask extends AbstractTask implements ModifiableTask,ChildTas
         return getDescription();
     }
 
-    @Override
-    public Boolean isCompleted() {
-        return this.completed;
-    }
-
-    /*@Override
-    public void accept(TaskVisitor visitor) {
-        visitor.visit(this);
-    }*/
-
     /**
-     * @param parentTask
+     * @param parentTask task to update
      */
     @Override
-    public void update(ParentTask parentTask) {
+    public void updateParent(ParentTask parentTask) {
         parentTask.updateDueDate();
         parentTask.updateProgress();
         parentTask.updateEstimatedDuration();

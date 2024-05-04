@@ -1,9 +1,7 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
-import com.univ.rouen.todolist.task.Priority;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public abstract class AbstractTaskFormController {

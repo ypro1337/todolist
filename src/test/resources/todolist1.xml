@@ -1,0 +1,12 @@
+<TodoList>
+    <BooleanTask description="Task 1" priority="URGENT" dueDate="2024-05-10" estimatedDuration="60" completed="true"/>
+    <BooleanTask description="Task 2" priority="NORMAL" dueDate="2024-05-11" estimatedDuration="45" completed="false"/>
+    <BooleanTask description="Task 3" priority="SECONDARY" dueDate="2024-05-12" estimatedDuration="30" completed="true"/>
+    <BooleanTask description="Task 4" priority="URGENT" dueDate="2024-05-13" estimatedDuration="20" completed="false"/>
+    <BooleanTask description="Task 5" priority="NORMAL" dueDate="2024-05-14" estimatedDuration="55" completed="true"/>
+    <BooleanTask description="Task 6" priority="SECONDARY" dueDate="2024-05-15" estimatedDuration="40" completed="false"/>
+    <BooleanTask description="Task 7" priority="URGENT" dueDate="2024-05-16" estimatedDuration="25" completed="true"/>
+    <BooleanTask description="Task 8" priority="NORMAL" dueDate="2024-05-17" estimatedDuration="50" completed="false"/>
+    <BooleanTask description="Task 9" priority="SECONDARY" dueDate="2024-05-18" estimatedDuration="35" completed="true"/>
+    <BooleanTask description="Task 10" priority="URGENT" dueDate="2024-05-19" estimatedDuration="15" completed="false"/>
+</TodoList>

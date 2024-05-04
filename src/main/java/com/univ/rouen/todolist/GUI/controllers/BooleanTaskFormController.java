@@ -1,4 +1,4 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
 import com.univ.rouen.todolist.task.Priority;
 import javafx.fxml.FXML;
@@ -129,7 +129,7 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
      *
      * @param location  The location used to resolve relative paths for the root object, or
      *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
+     * @param views The views used to localize the root object, or {@code null} if
      *                  the root object was not localized.
      */
 

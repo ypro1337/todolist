@@ -14,13 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 @XmlRootElement(name = "complexTask")
-public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTask{
+public class ComplexTask extends AbstractTask implements ChildTask,ParentTask{
     @XmlElements({@XmlElement}) 
-    private List<Task> subTasks;
+    private List<ChildTask> subTasks;
     private  ParentTask parentTask;
 
     @XmlElement
-    private double progress;
+    private Double progress;
 
     public ComplexTask() {}
 
@@ -28,11 +28,11 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
         this.description = description;
         this.priority = priority;
         this.subTasks = new ArrayList<>();
-        this.estimatedDuration = 0;
-        this.progress = 0;
+        updateEstimatedDuration();
+        updateProgress();
     }
 
-    public ComplexTask(String description, Priority priority, List<Task> subTasks) {
+    public ComplexTask(String description, Priority priority, List<ChildTask> subTasks) {
         this.description = description;
         this.priority = priority;
         this.subTasks = new ArrayList<>(subTasks);
@@ -40,46 +40,22 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
         updateProgress();
     }
 
-    public ComplexTask(String description, Priority priority,Task... subTasks) {
+    public ComplexTask(String description, Priority priority,ChildTask... subTasks) {
         this.description = description;
         this.priority = priority;
         this.subTasks = new ArrayList<>(Arrays.stream(subTasks).toList());
         updateEstimatedDuration();
         updateProgress();
     }
-    // Getters and setters
 
-    @Override
-    public String getDescription() {
-        return description;
-    }
-    @Override
-    public LocalDate getDueDate() {
-        return this.dueDate;
-    }
 
     /**
      * @return
      */
     @Override
     public Boolean isCompleted() {
-        return this.progress == 100 ;
-    }
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
-    @Override
-    public double getProgress() {
-        return progress;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+        // TODO check if all subTaks Complete
+        return false;
     }
 
     /**
@@ -87,20 +63,7 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
      */
     @Override
     public void setCompleted(Boolean completed) {
-
-    }
-
-    public Integer getEstimatedDuration() {
-        return estimatedDuration;
-    }
-
-    @Override
-    public void setDueDate(LocalDate dueDate){
-    this.dueDate=dueDate;
-    }
-    @Override
-    public void setEstimatedDuration(Integer estimatedDuration){
-        this.estimatedDuration=estimatedDuration;
+        //TODO make all SubTasks Complete
     }
 
     //TODO implement update classes for parent
@@ -108,7 +71,7 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
     public void updateDueDate() {
         // Min LocalDate is today for todoList
         LocalDate maxDueDate = LocalDate.now();
-        for (Task task : subTasks) {
+        for (ChildTask task : subTasks) {
             //Take the maximum of the two
             maxDueDate= maxDueDate.isBefore(task.getDueDate()) ? task.getDueDate() : maxDueDate   ;
         }
@@ -116,37 +79,38 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
 
         if(parentTask!=null)
         {
-            update(parentTask);
+            updateParent(parentTask);
         }
     }
      @Override
      public void updateEstimatedDuration() {
-
         Integer totalDuration = 0;
-        for (Task task : subTasks) {
+        for (ChildTask task : subTasks) {
             totalDuration += task.getEstimatedDuration();
         }
         this.estimatedDuration = totalDuration;
          if(parentTask!=null)
          {
-             update(parentTask);
+             updateParent(parentTask);
          }
     }
     @Override
     public void updateProgress() {
-        double totalProgress = 0;
+        Double totalProgress = 0.0;
         double subTaskCount = subTasks.size();
         if (subTaskCount > 0) {
-            for (Task task : subTasks) {
-                totalProgress += task.isCompleted() ? 100 : 0;
+            for (ChildTask task : subTasks) {
+
+                totalProgress += task.isCompleted() ? 100.0 : 0.0;
             }
             this.progress = totalProgress / subTaskCount;
         } else {
-            this.progress = 0;
+            this.progress = 0.0;
         }
         if(parentTask!=null)
         {
-            update(parentTask);
+            updateParent(parentTask);
+
         }
     }
 
@@ -156,35 +120,21 @@ public class ComplexTask extends AbstractTask implements ModifiableTask,ParentTa
         return getDescription();
     }
 
-    /**
-     * @param visitor
-     */
-    /*@Override
-    public void accept(TaskVisitor visitor) {
-        visitor.visit(this);
-    }*/
 
     /**
      * @return
      */
     @Override
-    public List<Task> getChildren() {
+    public List<ChildTask> getChildren() {
         return this.subTasks;
     }
 
-    /**
-     * @return
-     */
-    @Override
-    public ComplexTask getTask() {
-        return this;
-    }
 
     /**
      * @param parentTask
      */
     @Override
-    public void update(ParentTask parentTask) {
+    public void updateParent(ParentTask parentTask) {
         parentTask.updateDueDate();
         parentTask.updateProgress();
         parentTask.updateEstimatedDuration();

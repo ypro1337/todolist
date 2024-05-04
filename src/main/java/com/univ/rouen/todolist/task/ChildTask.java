@@ -1,5 +1,5 @@
 package com.univ.rouen.todolist.task;
 
-public interface ChildTask {
-    void update(ParentTask parentTask);
+public interface ChildTask extends ModifiableTask {
+    void updateParent(ParentTask parentTask);
 }

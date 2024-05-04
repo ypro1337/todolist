@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<TreeTableView fx:id="taskTreeTableView" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.GUI.TreeTableController">
+<TreeTableView fx:id="taskTreeTableView" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.TreeTableController">
     <columns>
         <TreeTableColumn fx:id="description" prefWidth="150" text="Description">
             <cellValueFactory>

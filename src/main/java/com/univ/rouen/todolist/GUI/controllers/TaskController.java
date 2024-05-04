@@ -1,4 +1,4 @@
-package com.univ.rouen.todolist.GUI;
+package com.univ.rouen.todolist.gui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,7 +53,7 @@ public class TaskController implements Initializable {
     private void showTaskForm() {
         try {
             // Load the TaskForm.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/TaskForm-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/views/TaskForm.fxml"));
             Region content = loader.load();
             subScene.setRoot(content);
             subScene.setVisible(true);
@@ -69,13 +69,13 @@ public class TaskController implements Initializable {
      *
      * @param location  The location used to resolve relative paths for the root object, or
      *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
+     * @param resources The views used to localize the root object, or {@code null} if
      *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/TreeTable-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/views/TreeTable.fxml"));
             Region content = loader.load();
             treeTableController = loader.getController();
             subScene.setRoot(content);
@@ -88,7 +88,7 @@ public class TaskController implements Initializable {
     public void addTask(ActionEvent actionEvent) {
         try {
             // Load the TaskForm.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/TaskForm-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/univ/rouen/todolist/views/TaskForm.fxml"));
             Parent root = (Parent)loader.load();
 
             // Create a new stage for the task form

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Define enumeration for priority -->
+    <xs:simpleType name="Priority">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="URGENT"/>
+            <xs:enumeration value="NORMAL"/>
+            <xs:enumeration value="SECONDARY"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Define LocalDate type -->
+    <xs:simpleType name="LocalDate">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <!-- Define BooleanTask -->
+    <xs:complexType name="BooleanTask">
+        <xs:attribute name="description" type="xs:string" use="required"/>
+        <xs:attribute name="priority" type="Priority" use="required"/>
+        <xs:attribute name="dueDate" type="LocalDate" use="required"/>
+        <xs:attribute name="estimatedDuration" type="xs:integer" use="required"/>
+        <xs:attribute name="completed" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <!-- Define ComplexTask -->
+    <xs:complexType name="ComplexTask">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="ComplexTask" type="ComplexTask"/>
+                <xs:element name="BooleanTask" type="BooleanTask"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="description" type="xs:string" use="required"/>
+        <xs:attribute name="priority" type="Priority" use="required"/>
+        <xs:attribute name="dueDate" type="LocalDate" use="prohibited"/>
+        <xs:attribute name="estimatedDuration" type="xs:integer" use="prohibited"/>
+        <xs:attribute name="progress" type="xs:integer"  use="prohibited"/>
+    </xs:complexType>
+
+    <!-- Define root element -->
+    <xs:element name="TodoList">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="ComplexTask" type="ComplexTask"/>
+                <xs:element name="BooleanTask" type="BooleanTask"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
