@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TodoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/com/univ/rouen/todolist/views/todolist.dtd">
+    <Task xsi:type="complexTask" progress="100.0" description="Task P" dueDate="2024-05-07" priority="NORMAL" estimatedDuration="84">
+        <subTask xsi:type="booleanTask" description="Subtask P" dueDate="2024-05-07" priority="NORMAL" estimatedDuration="84" completed="true"/>
+    </Task>
+    <Task xsi:type="complexTask" progress="0.0" description="Task Q" dueDate="2024-05-08" priority="NORMAL" estimatedDuration="0">
+        <subTask xsi:type="booleanTask" description="Subtask Q" dueDate="2024-05-08" priority="NORMAL" estimatedDuration="0" completed="false"/>
+    </Task>
+    <Task xsi:type="complexTask" description="Task R" priority="NORMAL"/>
+    <Task xsi:type="complexTask" description="Task L" priority="NORMAL"/>
+    <Task xsi:type="complexTask" description="Task M" priority="NORMAL"/>
+    <Task xsi:type="complexTask" description="Task N" priority="NORMAL"/>
+    <Task xsi:type="complexTask" description="Task O" priority="NORMAL"/>
+    <Task xsi:type="complexTask" description="Task K" priority="NORMAL"/>
+</TodoList>

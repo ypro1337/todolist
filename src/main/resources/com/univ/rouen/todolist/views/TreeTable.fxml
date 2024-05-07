@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<TreeTableView fx:id="taskTreeTableView" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.TreeTableController">
-    <columns>
-        <TreeTableColumn fx:id="description" prefWidth="150" text="Description">
-            <cellValueFactory>
-                <PropertyValueFactory property="description" />
-            </cellValueFactory>
-        </TreeTableColumn>
-        <TreeTableColumn fx:id="dueDate" prefWidth="100" text="Due Date">
-            <cellValueFactory>
-                <PropertyValueFactory property="deadline" />
-            </cellValueFactory>
-        </TreeTableColumn>
-        <TreeTableColumn fx:id="priority" prefWidth="100" text="Priority">
-            <cellValueFactory>
-                <PropertyValueFactory property="priority" />
-            </cellValueFactory>
-        </TreeTableColumn>
-        <TreeTableColumn fx:id="estimatedDuration" prefWidth="150" text="Estimated Duration">
-            <cellValueFactory>
-                <PropertyValueFactory property="estimatedDuration" />
-            </cellValueFactory>
-        </TreeTableColumn>
-        <TreeTableColumn fx:id="progress" prefWidth="100" text="Progress">
-            <cellValueFactory>
-                <PropertyValueFactory property="progress" />
-            </cellValueFactory>
-        </TreeTableColumn>
-    </columns>
-</TreeTableView>
+<AnchorPane prefHeight="431.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.controllers.TreeTableController">
+    <TreeTableView fx:id="taskTreeTableView" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TreeTableColumn fx:id="description" prefWidth="150" text="Description">
+                <cellValueFactory>
+                    <PropertyValueFactory property="description" />
+                </cellValueFactory>
+            </TreeTableColumn>
+            <TreeTableColumn fx:id="dueDate" prefWidth="100" text="Due Date">
+                <cellValueFactory>
+                    <PropertyValueFactory property="deadline" />
+                </cellValueFactory>
+            </TreeTableColumn>
+            <TreeTableColumn fx:id="priority" prefWidth="100" text="Priority">
+                <cellValueFactory>
+                    <PropertyValueFactory property="priority" />
+                </cellValueFactory>
+            </TreeTableColumn>
+            <TreeTableColumn fx:id="estimatedDuration" prefWidth="150" text="Estimated Duration">
+                <cellValueFactory>
+                    <PropertyValueFactory property="estimatedDuration" />
+                </cellValueFactory>
+            </TreeTableColumn>
+            <TreeTableColumn fx:id="progress" prefWidth="100" text="Progress">
+                <cellValueFactory>
+                    <PropertyValueFactory property="progress" />
+                </cellValueFactory>
+            </TreeTableColumn>
+        </columns>
+    </TreeTableView>
+   <ButtonBar layoutX="-28.0" layoutY="391.0" prefHeight="40.0" prefWidth="600.0">
+     <buttons>
+          <Button fx:id="refreshButton" onAction="#refreshTreeTableView" prefHeight="26.0" prefWidth="362.0" text="Refresh" />
+
+         <Button fx:id="deleteButton" onAction="#deleteSelectedRecord" text="Delete" style="-fx-background-color: #ff0000; -fx-text-fill: white;" onMouseEntered="#buttonHoverEntered" onMouseExited="#buttonHoverExited" />
+
+     </buttons>
+   </ButtonBar>
+    <!--<Button fx:id="sortButton" text="Sort" onAction="#sortTreeTableView" /> -->
+</AnchorPane>

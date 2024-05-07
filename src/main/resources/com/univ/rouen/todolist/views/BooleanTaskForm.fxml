@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="300" prefWidth="400" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.BooleanTaskFormController">
+<?import javafx.scene.control.ComboBox?>
+<VBox fx:id="root" alignment="CENTER" prefHeight="300" prefWidth="400" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.controllers.BooleanTaskFormController">
     <Label alignment="CENTER" prefHeight="32.0" prefWidth="134.0" text="Boolean Task Form">
         <font>
             <Font size="16.0" />
@@ -34,6 +35,9 @@
 
         <Label text="Completed:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <CheckBox fx:id="completedCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label text="Parent Task:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <ComboBox fx:id="parentTaskComboBox" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />

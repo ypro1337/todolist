@@ -1,14 +1,11 @@
-package com.univ.rouen.todolist.gui;
+package com.univ.rouen.todolist;
 
-import com.univ.rouen.todolist.analyzer.Analyzer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Main class for the Todo List application.
@@ -24,7 +21,7 @@ public class TodoListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TodoListApplication.class.getResource("/com/univ/rouen/todolist/views/TaskLanding.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 670, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 500);
         stage.setTitle("Todo List");
         stage.setScene(scene);
         stage.show();

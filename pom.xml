@@ -106,7 +106,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.univ.rouen.todolist/com.univ.rouen.todolist.gui.TodoListApplication</mainClass>
+              <mainClass>com.univ.rouen.todolist/com.univ.rouen.todolist.TodoListApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

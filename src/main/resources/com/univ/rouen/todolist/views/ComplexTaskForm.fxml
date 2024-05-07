@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="300" prefWidth="400" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.ComplexTaskFormController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="300" prefWidth="400" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.controllers.ComplexTaskFormController">
     <Label alignment="CENTER" text="Complex Task Form">
         <font>
             <Font size="16.0" />

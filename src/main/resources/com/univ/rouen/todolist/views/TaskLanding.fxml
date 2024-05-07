@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.gui.controllers.TaskController">
+<VBox prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.rouen.todolist.controllers.TaskController" >
     <MenuBar>
         <menus>
             <Menu text="File">
@@ -25,14 +25,11 @@
    <ButtonBar prefHeight="40.0" prefWidth="200.0">
      <buttons>
          <!-- Button to show the TreeTableView -->
-         <Button fx:id="showTreeTableViewButton" onAction="#showTreeTableView" prefHeight="26.0" prefWidth="288.0" text="Show TreeTableView" />
-
-         <!-- Button to hide the TreeTableView, initially hidden -->
-         <Button fx:id="hideTreeTableViewButton" onAction="#hideTreeTableView" prefHeight="26.0" prefWidth="288.0" text="Hide TreeTableView"  visible="false" />
+         <Button fx:id="TreeTableViewButton" onAction="#displayTreeTableView" prefHeight="26.0" prefWidth="288.0" text="Show Tree Table View" />
          <Button mnemonicParsing="false" onAction="#addTask" prefHeight="26.0" text="Add Task" />
      </buttons>
    </ButtonBar>
-   <SubScene fx:id="subScene" height="226.0" width="670.0">
+   <SubScene fx:id="subScene" height="450.0" width="600.0">
      <root>
        <Region />
      </root>

@@ -1,7 +1,6 @@
-package com.univ.rouen.todolist.gui.controllers;
+package com.univ.rouen.todolist.controllers;
 
-import com.univ.rouen.todolist.task.Priority;
-import com.univ.rouen.todolist.task.TaskManager;
+import com.univ.rouen.todolist.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,12 +17,12 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
 
     private TaskManager taskManager;
 
-
     @FXML
     private DatePicker dueDatePicker;
 
     @FXML
     private TextField descriptionTextField;
+
     @FXML
     private ChoiceBox<Priority> priorityChoiceBox;
 
@@ -46,9 +45,11 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        taskManager = TaskManager.getInstance();
         priorityChoiceBox.getItems().addAll(Priority.values());
         priorityChoiceBox.setValue(Priority.NORMAL); // Default value
-
+        parentTaskComboBox.getItems().addAll(taskManager.getParentTasks());
+        parentTaskComboBox.setValue(null);
         // Set today's date to dateField
         dueDatePicker.setValue(LocalDate.now());
         estimatedDurationTextField.setText("0");
@@ -102,12 +103,12 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
      * @return True if the estimated duration is valid, otherwise false.
      */
     private boolean validateDuration(String newValue) {
-        try{
+        try {
             if (!newValue.matches("\\d+") || Integer.parseInt(newValue) < 0) {
                 errorLabel.setText("Estimated duration must be non-negative number");
-                return false ;
+                return false;
             }
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new RuntimeException(e);
         }
         errorLabel.setText("");
@@ -127,18 +128,27 @@ public class BooleanTaskFormController extends AbstractTaskFormController implem
      */
     public void submitForm() {
         // Validate fields
-
+        if (descriptionTextField.getText().isEmpty()) {
+            showAlert("Please fill in all fields.");
+            return;
+        }
         // Get form values
         String description = descriptionTextField.getText();
         LocalDate dueDate = dueDatePicker.getValue();
         Priority priority = priorityChoiceBox.getValue();
         Integer estimatedDuration = Integer.parseInt(estimatedDurationTextField.getText());
         Boolean completed = completedCheckBox.isSelected();
-
-        // Submit form ( TODO implement logic here)
-
+        Task parentTask = parentTaskComboBox.getValue();
+        BooleanTask booleanTask = new BooleanTaskBuilder()
+                .description(description)
+                .priority(priority)
+                .dueDate(dueDate).estimatedDuration(estimatedDuration)
+                .completed(completed)
+                .parentTask(parentTask)
+                .build();
+        taskManager.addTask(booleanTask);
+        booleanTask.updateParents();
+        //close and refresh
+        closeFormWindow();
     }
-
-
-
 }

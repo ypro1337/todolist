@@ -1,12 +1,14 @@
-package com.univ.rouen.todolist.gui.controllers;
+package com.univ.rouen.todolist.controllers;
 
+import com.univ.rouen.todolist.model.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
- * Abstract base controller class for task forms.
- * Provides common functionality and UI components for task form controllers.
+ * Abstract base controller class for model forms.
+ * Provides common functionality and UI components for model form controllers.
  */
 public abstract class AbstractTaskFormController {
 
@@ -19,6 +21,9 @@ public abstract class AbstractTaskFormController {
     @FXML
     protected VBox root;
 
+    @FXML
+    protected ComboBox<Task> parentTaskComboBox;
+
     /**
      * Displays a warning alert with the given message.
      *
@@ -30,6 +35,7 @@ public abstract class AbstractTaskFormController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     /**
      * Validates the length of the entered description.
      *
@@ -46,8 +52,13 @@ public abstract class AbstractTaskFormController {
         return true;
     }
 
-
-
-
+    /**
+     * Closes the form window.
+     */
+    protected void closeFormWindow() {
+        // Get the stage (window) of any JavaFX control in the scene
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+        // Close the stage
+        stage.close();
+    }
 }
-

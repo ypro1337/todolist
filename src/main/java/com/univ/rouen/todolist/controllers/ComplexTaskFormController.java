@@ -1,14 +1,12 @@
-package com.univ.rouen.todolist.gui.controllers;
+package com.univ.rouen.todolist.controllers;
 
-import com.univ.rouen.todolist.task.Priority;
-import com.univ.rouen.todolist.task.TaskManager;
+import com.univ.rouen.todolist.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 /**
  * Controller class for the ComplexTask form.
@@ -20,17 +18,14 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
 
     @FXML
     private TextField descriptionTextField;
+
     @FXML
     private ChoiceBox<Priority> priorityChoiceBox;
-    @FXML
-    private ComboBox<String> parentTaskComboBox;
-
 
     @FXML
     private TreeView<String> taskTreeView;
 
     private boolean isDescriptionLengthValid = true;
-
 
     /**
      * Initializes the controller after its root element has been completely processed.
@@ -41,12 +36,11 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        taskManager = TaskManager.getInstance();
         priorityChoiceBox.getItems().addAll(Priority.values());
         priorityChoiceBox.setValue(Priority.NORMAL); // Default value
-        // Populate parent task combo box (for hierarchy selection)
-        parentTaskComboBox.getItems().addAll("Parent Task 1", "Parent Task 2", "Parent Task 3"); // Add your logic to get parent tasks
+        parentTaskComboBox.getItems().addAll(taskManager.getParentTasks());
         submitButton.setDisable(true);
-
 
         descriptionTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             isDescriptionLengthValid = validateDescriptionLength(newValue);
@@ -69,19 +63,24 @@ public class ComplexTaskFormController extends AbstractTaskFormController implem
         // Get form values
         String description = descriptionTextField.getText();
         Priority priority = priorityChoiceBox.getValue();
-        String parentTask = parentTaskComboBox.getValue();
+        Task parentTask = parentTaskComboBox.getValue();
 
+        ComplexTask complexTask = new ComplexTaskBuilder()
+                .description(description)
+                .priority(priority)
+                .parentTask(parentTask)
+                .build();
 
-        // Submit form (you can implement your logic here)
-
+        taskManager.getParentTasks().add(complexTask);
+        taskManager.addTask(complexTask);
+        closeFormWindow();
         //TODO Create TreeItem + Task
-        //taskManager.addParentTask(this task);
     }
 
-
+    /**
+     * Updates the state of the submit button based on field validations.
+     */
     private void updateSubmitButtonState() {
         submitButton.setDisable(!(isDescriptionLengthValid));
     }
-
-
 }

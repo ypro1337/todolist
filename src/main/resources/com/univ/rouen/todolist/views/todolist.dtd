@@ -1,0 +1,19 @@
+<!ELEMENT TodoList (complexTask | booleanTask)*>
+
+        <!ELEMENT complexTask (complexTask | booleanTask)+>
+        <!ATTLIST complexTask
+                progress CDATA #REQUIRED
+                description CDATA #REQUIRED
+                dueDate CDATA #REQUIRED
+                priority CDATA #REQUIRED
+                estimatedDuration CDATA #REQUIRED
+                >
+
+        <!ELEMENT booleanTask EMPTY>
+        <!ATTLIST booleanTask
+                description CDATA #REQUIRED
+                dueDate CDATA #REQUIRED
+                priority CDATA #REQUIRED
+                estimatedDuration CDATA #REQUIRED
+                completed CDATA #REQUIRED
+                >

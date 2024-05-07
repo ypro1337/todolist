@@ -1,12 +1,16 @@
-<TodoList>
-    <BooleanTask description="Task 1" priority="URGENT" dueDate="2024-05-10" estimatedDuration="60" completed="true"/>
-    <BooleanTask description="Task 2" priority="NORMAL" dueDate="2024-05-11" estimatedDuration="45" completed="false"/>
-    <BooleanTask description="Task 3" priority="SECONDARY" dueDate="2024-05-12" estimatedDuration="30" completed="true"/>
-    <BooleanTask description="Task 4" priority="URGENT" dueDate="2024-05-13" estimatedDuration="20" completed="false"/>
-    <BooleanTask description="Task 5" priority="NORMAL" dueDate="2024-05-14" estimatedDuration="55" completed="true"/>
-    <BooleanTask description="Task 6" priority="SECONDARY" dueDate="2024-05-15" estimatedDuration="40" completed="false"/>
-    <BooleanTask description="Task 7" priority="URGENT" dueDate="2024-05-16" estimatedDuration="25" completed="true"/>
-    <BooleanTask description="Task 8" priority="NORMAL" dueDate="2024-05-17" estimatedDuration="50" completed="false"/>
-    <BooleanTask description="Task 9" priority="SECONDARY" dueDate="2024-05-18" estimatedDuration="35" completed="true"/>
-    <BooleanTask description="Task 10" priority="URGENT" dueDate="2024-05-19" estimatedDuration="15" completed="false"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TodoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/com/univ/rouen/todolist/views/todolist.dtd">
+    <complexTask xsi:type="complexTask" progress="50.0" description="s" dueDate="2024-05-06" priority="NORMAL" estimatedDuration="21">
+        <complexSubTask xsi:type="complexTask" progress="0.0" description="ss" dueDate="2024-05-05" priority="NORMAL" estimatedDuration="0">
+            <complexSubTask xsi:type="booleanTask" description="ssh" dueDate="2024-05-08" priority="NORMAL" estimatedDuration="0" completed="false"/>
+        </complexSubTask>
+        <complexSubTask xsi:type="booleanTask" description="sh" dueDate="2024-04-08" priority="NORMAL" estimatedDuration="21" completed="true"/>
+    </complexTask>
+    <complexTask xsi:type="complexTask" progress="50.0" description="Complex" dueDate="2021-05-08" priority="NORMAL" estimatedDuration="21">
+        <complexSubTask xsi:type="complexTask" progress="0.0" description="Complex Child" dueDate="2023-05-08" priority="NORMAL" estimatedDuration="0">
+            <complexSubTask xsi:type="booleanTask" description="Complex Child Child" dueDate="2020-05-08" priority="NORMAL" estimatedDuration="0" completed="false"/>
+        </complexSubTask>
+        <complexSubTask xsi:type="booleanTask" description="sh" dueDate="2024-05-08" priority="NORMAL" estimatedDuration="21" completed="true"/>
+    </complexTask>
+    <complexTask xsi:type="booleanTask" description="h" dueDate="2024-05-08" priority="NORMAL" estimatedDuration="0" completed="false"/>
 </TodoList>
